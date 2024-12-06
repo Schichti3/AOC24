@@ -3,3 +3,4 @@
 #include "./Days/Day3.h"
 #include "./Days/Day4.h"
 #include "./Days/Day5.h"
+#include "./Days/Day6.h"

@@ -7,7 +7,7 @@ int main()
  std::vector<std::unique_ptr<Day>> days; 
  days.push_back(std::make_unique<Day1>(".\\input\\day1.txt")); days.push_back(std::make_unique<Day2>(".\\input\\day2.txt"));
  days.push_back(std::make_unique<Day3>(".\\input\\day3.txt")); days.push_back(std::make_unique<Day4>(".\\input\\day4.txt"));
- days.push_back(std::make_unique<Day5>(".\\input\\day5.txt"));
+ days.push_back(std::make_unique<Day5>(".\\input\\day5.txt")); days.push_back(std::make_unique<Day6>(".\\input\\day6.txt"));
 
  for (int i = 0; i < days.size(); i++)
  {
