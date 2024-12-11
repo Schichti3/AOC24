@@ -1,1 +1,1 @@
-g++ -o AOC -static Main.cpp ./Days/Day.cpp ./Days/Day1.cpp ./Days/Day2.cpp ./Days/Day3.cpp ./Days/Day4.cpp ./Days/Day5.cpp ./Days/Day6.cpp
+g++ -o AOC -static Main.cpp ./Days/Day.cpp ./Days/Day1.cpp ./Days/Day2.cpp ./Days/Day3.cpp ./Days/Day4.cpp ./Days/Day5.cpp ./Days/Day6.cpp ./Days/Day11.cpp

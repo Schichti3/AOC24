@@ -5,7 +5,7 @@
 class Day4 : public Day
 {
  public:
-  Day4(std::string path);
+  Day4(std::string path, int dayNum);
 
   std::string SolvePart1() override;
   std::string SolvePart2() override;

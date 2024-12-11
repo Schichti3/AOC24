@@ -1,8 +1,8 @@
 #include "Day6.h"
 #include <algorithm>
 
-Day6::Day6(std::string path) : 
- Day(path)
+Day6::Day6(std::string path, int dayNum) : 
+ Day(path, dayNum)
 {}
 
 void Day6::MoveGuard(int startX, int startY, char startDirection, std::vector<std::string>& lines)

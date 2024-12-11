@@ -11,7 +11,7 @@ struct OrderingRule
 class Day5 : public Day
 {
  public:
-  Day5(std::string path);
+  Day5(std::string path, int dayNum);
 
   std::string SolvePart1() override;
   std::string SolvePart2() override;

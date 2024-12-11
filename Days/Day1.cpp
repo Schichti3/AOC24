@@ -5,8 +5,8 @@
 #include <fstream>
 
 
-Day1::Day1(std::string path) : 
- Day(path)
+Day1::Day1(std::string path, int dayNum) : 
+ Day(path, dayNum)
 {}
 
 

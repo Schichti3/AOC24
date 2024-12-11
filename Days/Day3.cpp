@@ -1,8 +1,8 @@
 #include "Day3.h"
 
 
-Day3::Day3(std::string path) : 
- Day(path)
+Day3::Day3(std::string path, int dayNum) : 
+ Day(path, dayNum)
 {}
 
 

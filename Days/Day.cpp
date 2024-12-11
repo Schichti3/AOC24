@@ -2,8 +2,9 @@
 #include <fstream>
 #include <iostream>
 
-Day::Day(std::string path) : 
- mPath(path)
+Day::Day(std::string path, int dayNum) : 
+ mPath(path),
+ mDayNumber(dayNum)
 {
  std::ifstream inputFile(mPath);
  std::string line;
@@ -14,4 +15,9 @@ Day::Day(std::string path) :
  }
 
  inputFile.close();
+}
+
+int Day::GetDayNumber()
+{
+ return mDayNumber;   
 }

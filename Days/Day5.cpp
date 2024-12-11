@@ -7,8 +7,8 @@ Ich entschuldige mich jetzt schonmal an die arme CPU, welche diese unschöne Lö
 */
 
 
-Day5::Day5(std::string path) : 
- Day(path)
+Day5::Day5(std::string path, int dayNum) : 
+ Day(path, dayNum)
 {}
 
 std::vector<OrderingRule> Day5::ExtractOrderingRules(std::vector<std::string>& lines)
