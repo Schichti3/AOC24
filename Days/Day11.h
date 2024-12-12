@@ -9,5 +9,6 @@ class Day11 : public Day
   std::string SolvePart1() override;
   std::string SolvePart2() override;
  private:
-  void Blink(std::string& stones);
+  std::vector<unsigned long long> GetStones(std::string& stones);
+  void Blink(std::vector<unsigned long long>& stones);
 };
