@@ -17,6 +17,16 @@ Day::Day(std::string path, int dayNum) :
  inputFile.close();
 }
 
+std::string Day::SolvePart1()
+{
+ return "Not implemented.";
+}
+
+std::string Day::SolvePart2()
+{
+ return "Not implemented.";
+}
+
 int Day::GetDayNumber()
 {
  return mDayNumber;   

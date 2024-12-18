@@ -9,7 +9,7 @@ int main()
  days.push_back(std::make_unique<Day3>(".\\input\\day3.txt", 3)); days.push_back(std::make_unique<Day4>(".\\input\\day4.txt", 3));
  days.push_back(std::make_unique<Day5>(".\\input\\day5.txt", 5)); days.push_back(std::make_unique<Day6>(".\\input\\day6.txt", 6));
 
-
+ days.push_back(std::make_unique<Day9>(".\\input\\day9.txt", 9));
  days.push_back(std::make_unique<Day11>(".\\input\\day11.txt", 11));
 
  for (int i = 0; i < days.size(); i++)
