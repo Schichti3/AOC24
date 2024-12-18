@@ -1,6 +1,7 @@
 #include "Day9.h"
 #include <cassert>
 #include <iostream>
+#include <algorithm>
 
 Day9::Day9(std::string path, int dayNum) : 
  Day(path, dayNum)
@@ -100,11 +101,10 @@ void Day9::CompressPart2(std::map<int, int> files, std::map<int, int> freeSpaces
 {
  int pos = 0;
  auto lastUnfinishedFileIt = std::prev(files.end());
- auto filesIt = files.begin();
 
  //convert freeSpaces Map to vector of vector
  std::vector<std::vector<int>> vFreeSpaces;
- for (auto freeSpaceIt = freeSpaces.begin(); freeSpaceIt != freeSpaces.end(); freeSpaceIt)
+ for (auto freeSpaceIt = freeSpaces.begin(); freeSpaceIt != freeSpaces.end(); freeSpaceIt++)
  {
   std::vector<int> spaces;
   spaces.reserve(freeSpaceIt->second);
@@ -116,6 +116,44 @@ void Day9::CompressPart2(std::map<int, int> files, std::map<int, int> freeSpaces
    }
   }
   vFreeSpaces.push_back(std::move(spaces));
+ }
+
+ for (auto filesIt = std::prev(files.end()); filesIt != files.begin(); filesIt--)
+ {
+  for (int i = 0; i < vFreeSpaces.size(); i++)
+  {
+   if (std::count(vFreeSpaces[i].begin(), vFreeSpaces[i].end(), -1) >= filesIt->second)
+   {
+    for (int j = 0; j < vFreeSpaces[i].size(); j++)
+    {
+     if (vFreeSpaces[i][j] == -1)
+     {
+      for (int a = j; a <  vFreeSpaces[i].size(); a++)
+      {
+       vFreeSpaces[i][a] = filesIt->first;
+      }
+      break;
+     }
+    }
+    filesIt->second = 0;
+    break;
+   }
+  }
+ }
+
+ int spacesIndex = 0;
+ for (auto filesIt = files.begin(); filesIt != files.end() || filesIt->second != 0; filesIt++)
+ {
+  for (int i = 0; i < filesIt->second; i++)
+  {
+   dest.push_back(filesIt->first);
+  }
+
+  for (int j = 0; j < vFreeSpaces[spacesIndex].size(); j++)
+  {
+   dest.push_back(vFreeSpaces[spacesIndex][j]);
+  }
+  spacesIndex++;
  }
 
 }
@@ -130,12 +168,35 @@ unsigned long long Day9::GetCheckSum(const std::map<int, int>& compressed)
  return result;
 }
 
+unsigned long long Day9::GetCheckSum(const std::vector<int>& compressed)
+{
+ unsigned long long result = 0;
+ for (int i = 0; i < compressed.size(); i++)
+ {
+  if (compressed[i] >= 0)
+  {
+   result += i * compressed[i];
+  }
+ }
+ return result;
+}
+
 void Day9::PrintCompressed(const std::map<int, int>& compressed)
 {
  std::cout << std::endl;
  for (auto it = compressed.cbegin(); it != compressed.cend(); it++)
  {
   std::cout << it->second << " ";
+ }
+ std::cout << std::endl;
+}
+
+void Day9::PrintCompressed(const std::vector<int>& compressed)
+{
+ std::cout << std::endl;
+ for (auto it = compressed.cbegin(); it != compressed.cend(); it++)
+ {
+  std::cout << *it << " ";
  }
  std::cout << std::endl;
 }
@@ -159,5 +220,13 @@ std::string Day9::SolvePart2()
  std::map<int, int> files;
  std::map<int, int> freeSpaces;
  DecompressInput(files, freeSpaces);
- return "none";
+
+ std::vector<int> compressed;
+ CompressPart2(files, freeSpaces, compressed);
+
+ PrintCompressed(compressed);
+
+ unsigned long long ergebnis = GetCheckSum(compressed);
+
+ return std::to_string(ergebnis);
 }
