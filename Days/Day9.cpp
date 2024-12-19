@@ -118,9 +118,11 @@ void Day9::CompressPart2(std::map<int, int> files, std::map<int, int> freeSpaces
   vFreeSpaces.push_back(std::move(spaces));
  }
 
+ std::vector<int> emptyFileIds;
+
  for (auto filesIt = std::prev(files.end()); filesIt != files.begin(); filesIt--)
  {
-  for (int i = 0; i < vFreeSpaces.size(); i++)
+  for (int i = 0; i < filesIt->first; i++)
   {
    if (std::count(vFreeSpaces[i].begin(), vFreeSpaces[i].end(), -1) >= filesIt->second)
    {
@@ -128,14 +130,15 @@ void Day9::CompressPart2(std::map<int, int> files, std::map<int, int> freeSpaces
     {
      if (vFreeSpaces[i][j] == -1)
      {
-      for (int a = j; a <  vFreeSpaces[i].size(); a++)
+      for (int a = j; a <  vFreeSpaces[i].size() && a < filesIt->second; a++)
       {
        vFreeSpaces[i][a] = filesIt->first;
       }
       break;
      }
     }
-    filesIt->second = 0;
+    emptyFileIds.push_back(filesIt->first);
+    //filesIt->second = 0;
     break;
    }
   }
@@ -144,9 +147,23 @@ void Day9::CompressPart2(std::map<int, int> files, std::map<int, int> freeSpaces
  int spacesIndex = 0;
  for (auto filesIt = files.begin(); filesIt != files.end() || filesIt->second != 0; filesIt++)
  {
+  bool fillWithEmptiness = false;
+
+  if (std::find(emptyFileIds.begin(), emptyFileIds.end(), filesIt->first) != emptyFileIds.end())
+  {
+   fillWithEmptiness = true; 
+  }
+
   for (int i = 0; i < filesIt->second; i++)
   {
-   dest.push_back(filesIt->first);
+   if (fillWithEmptiness)
+   {
+    dest.push_back(-1);
+   }
+   else
+   {
+    dest.push_back(filesIt->first);
+   }
   }
 
   for (int j = 0; j < vFreeSpaces[spacesIndex].size(); j++)
@@ -224,7 +241,7 @@ std::string Day9::SolvePart2()
  std::vector<int> compressed;
  CompressPart2(files, freeSpaces, compressed);
 
- PrintCompressed(compressed);
+ //PrintCompressed(compressed);
 
  unsigned long long ergebnis = GetCheckSum(compressed);
 

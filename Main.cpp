@@ -11,6 +11,7 @@ int main()
 
  days.push_back(std::make_unique<Day9>(".\\input\\day9.txt", 9));
  days.push_back(std::make_unique<Day11>(".\\input\\day11.txt", 11));
+ days.push_back(std::make_unique<Day14>(".\\input\\day14.txt", 14));
 
  for (int i = 0; i < days.size(); i++)
  {
